@@ -23,6 +23,15 @@ services:
 
   event_service:
     build: .
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: event_service_db
+      DB_PORT: 5432
+      DB_NAME: postgres
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      KAFKA_EVENTS_TOPIC: events
     networks:
       - dislinkt
     ports:
