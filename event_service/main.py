@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Query
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi_contrib.conf import settings
 from sqlalchemy import create_engine
 from kafka import KafkaConsumer
@@ -30,14 +29,6 @@ EVENTS_URL = '/api/events'
 
 app = FastAPI(title='Event Service API')
 db = create_engine(f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['http://localhost:4200'],
-    allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
-)
 
 def setup_opentracing(app):
     config = Config(
